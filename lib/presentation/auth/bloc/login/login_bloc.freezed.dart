@@ -19,32 +19,38 @@ mixin _$LoginEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function(String email, String password) login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function(String email, String password)? login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function(String email, String password)? login,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_Login value) login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_Login value)? login,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_Login value)? login,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
+    required TResult Function(String email, String password) login,
   }) {
     return started();
   }
@@ -121,6 +128,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
+    TResult? Function(String email, String password)? login,
   }) {
     return started?.call();
   }
@@ -129,6 +137,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
+    TResult Function(String email, String password)? login,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -141,6 +150,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_Login value) login,
   }) {
     return started(this);
   }
@@ -149,6 +159,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
+    TResult? Function(_Login value)? login,
   }) {
     return started?.call(this);
   }
@@ -157,6 +168,7 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_Login value)? login,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -168,6 +180,160 @@ class _$StartedImpl with DiagnosticableTreeMixin implements _Started {
 
 abstract class _Started implements LoginEvent {
   const factory _Started() = _$StartedImpl;
+}
+
+/// @nodoc
+abstract class _$$LoginImplCopyWith<$Res> {
+  factory _$$LoginImplCopyWith(
+          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
+      __$$LoginImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email, String password});
+}
+
+/// @nodoc
+class __$$LoginImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginImpl>
+    implements _$$LoginImplCopyWith<$Res> {
+  __$$LoginImplCopyWithImpl(
+      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+  }) {
+    return _then(_$LoginImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoginImpl with DiagnosticableTreeMixin implements _Login {
+  const _$LoginImpl({required this.email, required this.password});
+
+  @override
+  final String email;
+  @override
+  final String password;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LoginEvent.login(email: $email, password: $password)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LoginEvent.login'))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('password', password));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email, password);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String email, String password) login,
+  }) {
+    return login(email, password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String email, String password)? login,
+  }) {
+    return login?.call(email, password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String email, String password)? login,
+    required TResult orElse(),
+  }) {
+    if (login != null) {
+      return login(email, password);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Login value) login,
+  }) {
+    return login(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Login value)? login,
+  }) {
+    return login?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Login value)? login,
+    required TResult orElse(),
+  }) {
+    if (login != null) {
+      return login(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Login implements LoginEvent {
+  const factory _Login(
+      {required final String email,
+      required final String password}) = _$LoginImpl;
+
+  String get email;
+  String get password;
+  @JsonKey(ignore: true)
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

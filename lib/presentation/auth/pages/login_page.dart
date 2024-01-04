@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_pos_fic11/data/models/response/auth_response_model.dart';
+import 'package:flutter_pos_fic11/presentation/auth/bloc/login/login_bloc.dart';
+// import 'package:flutter_pos_fic11/presentation/home/pages/dashboard_page.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
@@ -72,16 +76,49 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
           ),
           const SpaceHeight(24.0),
-          Button.filled(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DashboardPage(),
-                ),
+          BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                orElse: () {},
+                success: (authResponseModel) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DashboardPage(),
+                    ),
+                  );
+                },
+                error: (message) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(message),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                },
               );
             },
-            label: 'Masuk',
+            child: BlocBuilder<LoginBloc, LoginState>(
+              builder: (context, state) {
+                return state.maybeWhen(orElse: () {
+                  return Button.filled(
+                    onPressed: () {
+                      context.read<LoginBloc>().add(
+                            LoginEvent.login(
+                              email: usernameController.text,
+                              password: passwordController.text,
+                            ),
+                          );
+                    },
+                    label: 'masuk',
+                  );
+                }, loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                });
+              },
+            ),
           ),
         ],
       ),
